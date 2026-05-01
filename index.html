@@ -2,103 +2,122 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Рейс DK 01042026 — Кристина и Дима</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0E1A2B" />
+<title>Рейс DK 01042026 — Дима и Кристина</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --white:#FFFFFF;
-  --graphite:#2C2C2C;
-  --graphite-soft:#3a3a3a;
-  --sand:#F5E6D3;
-  --sand-deep:#EBD9BF;
-  --terracotta:#E07A5F;
-  --emerald:#2A9D8F;
-  --gold:#D4AF37;
-  --line:rgba(255,255,255,0.18);
-  --line-dark:rgba(44,44,44,0.18);
-  --on-dark:rgba(245,230,211,0.92);
-  --on-dark-soft:rgba(245,230,211,0.78);
-  --display:'Cormorant Garamond', serif;
+  --paper:#FAF5EC;
+  --paper-deep:#F0E7D4;
+  --ink-deep:#0E1A2B;
+  --ink:#1B2940;
+  --ink-soft:#3A4A66;
+  --ink-mute:#7A8AA3;
+  --coral:#E96B4A;
+  --coral-soft:#F18968;
+  --gold:#E8B86B;
+  --teal:#2C7A78;
+  --teal-soft:#3F9694;
+  --line:rgba(14,26,43,0.12);
+  --line-soft:rgba(14,26,43,0.07);
+  --on-dark:rgba(250,245,236,0.94);
+  --on-dark-soft:rgba(250,245,236,0.72);
+
+  --display:'Fraunces', Georgia, serif;
   --mono:'JetBrains Mono', ui-monospace, monospace;
-  --body:'Inter', system-ui, sans-serif;
+  --body:'Inter', system-ui, -apple-system, sans-serif;
+
+  /* COMPACT sizing — уменьшено в ~1.5–2 раза */
+  --pad-x:clamp(18px, 5vw, 40px);
+  --pad-y:clamp(48px, 8vw, 80px);
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   font-family:var(--body);
-  background:var(--sand);
-  color:var(--graphite);
+  background:var(--paper);
+  color:var(--ink);
   font-weight:300;
-  line-height:1.6;
+  line-height:1.55;
   overflow-x:hidden;
+  font-feature-settings:"kern", "liga", "ss01";
 }
 
-/* === HEADER / FLIGHT BOARD === */
+/* === BOARD === */
 .board{
-  background:var(--graphite);
-  color:var(--sand);
-  padding:14px 28px;
+  background:var(--ink-deep);
+  color:var(--paper);
+  padding:11px var(--pad-x);
   display:flex;
   justify-content:space-between;
   align-items:center;
   font-family:var(--mono);
-  font-size:11px;
+  font-size:clamp(9px, 2.4vw, 11px);
   letter-spacing:0.18em;
   text-transform:uppercase;
-  border-bottom:1px solid var(--line);
   position:sticky;
   top:0;
   z-index:50;
+  gap:12px;
 }
-.board-left{display:flex;gap:24px;align-items:center}
+.board-left{display:flex;gap:12px;align-items:center;min-width:0;flex:1}
 .board-dot{
   width:7px;height:7px;border-radius:50%;
-  background:var(--terracotta);
-  box-shadow:0 0 0 0 var(--terracotta);
-  animation:pulse 2.2s infinite;
+  background:var(--gold);
+  box-shadow:0 0 0 0 var(--gold);
+  animation:pulse 2.4s infinite;
+  flex-shrink:0;
 }
+.board-flight{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(224,122,95,0.6)}
-  70%{box-shadow:0 0 0 8px rgba(224,122,95,0)}
-  100%{box-shadow:0 0 0 0 rgba(224,122,95,0)}
+  0%{box-shadow:0 0 0 0 rgba(232,184,107,0.6)}
+  70%{box-shadow:0 0 0 8px rgba(232,184,107,0)}
+  100%{box-shadow:0 0 0 0 rgba(232,184,107,0)}
 }
-.board-status{color:var(--terracotta)}
-.board-right{display:flex;gap:24px}
-.board-time{color:var(--gold)}
-@media(max-width:720px){
-  .board{font-size:9px;padding:12px 16px;letter-spacing:0.12em}
-  .board-left{gap:14px}
-  .board-right{gap:14px}
-  .board-hide{display:none}
+.board-status{color:var(--gold);white-space:nowrap}
+.board-time{color:var(--teal-soft);font-variant-numeric:tabular-nums}
+.board-right{display:flex;gap:14px;flex-shrink:0}
+@media(max-width:480px){
+  .board-status-text{display:none}
+  .board-status::before{content:'●';color:var(--gold)}
 }
 
 /* === HERO === */
 .hero{
-  background:var(--graphite);
-  color:var(--white);
-  padding:90px 32px 110px;
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(233,107,74,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(44,122,120,0.22) 0%, transparent 60%),
+    linear-gradient(180deg, #0E1A2B 0%, #1B2940 60%, #2C3E5C 100%);
+  color:var(--paper);
+  padding:clamp(48px, 10vw, 90px) var(--pad-x) clamp(56px, 11vw, 100px);
   position:relative;
   overflow:hidden;
 }
 .hero::before{
   content:'';
-  position:absolute;
-  inset:0;
+  position:absolute;inset:0;
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(212,175,55,0.08), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(42,157,143,0.07), transparent 45%);
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 75% 65%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 50% 15%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 88% 25%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 15% 75%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1px 1px at 60% 88%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 35% 50%, rgba(255,255,255,0.25), transparent);
   pointer-events:none;
+  opacity:0.6;
 }
-.hero-grid{
+.hero::after{
+  content:'';
   position:absolute;inset:0;
   background-image:
     linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size:60px 60px;
+  background-size:80px 80px;
   pointer-events:none;
 }
 .hero-inner{
@@ -109,312 +128,307 @@ body{
 }
 .hero-meta{
   font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:0.3em;
+  font-size:clamp(10px, 2.5vw, 11px);
+  letter-spacing:0.28em;
   text-transform:uppercase;
   color:var(--gold);
-  margin-bottom:32px;
+  margin-bottom:clamp(14px, 3vw, 24px);
   display:flex;
-  gap:16px;
+  gap:12px;
   align-items:center;
   flex-wrap:wrap;
 }
 .hero-meta .sep{opacity:0.4}
 .hero-flight{
   font-family:var(--mono);
-  font-size:clamp(48px, 11vw, 140px);
+  font-size:clamp(54px, 16vw, 150px);
   font-weight:300;
-  letter-spacing:-0.02em;
-  line-height:0.95;
-  color:var(--white);
-  margin-bottom:24px;
+  letter-spacing:-0.03em;
+  line-height:0.92;
+  color:var(--paper);
+  margin-bottom:clamp(16px, 3.5vw, 24px);
 }
-.hero-flight em{
-  font-style:normal;
-  color:var(--terracotta);
-}
+.hero-flight em{font-style:normal;color:var(--coral)}
 .hero-title{
   font-family:var(--display);
-  font-size:clamp(36px, 6vw, 72px);
+  font-size:clamp(28px, 6.5vw, 56px);
   font-weight:400;
   font-style:italic;
   line-height:1.05;
-  margin-bottom:40px;
+  margin-bottom:clamp(20px, 4.5vw, 32px);
   max-width:780px;
-  letter-spacing:-0.01em;
-  color:var(--white);
+  letter-spacing:-0.015em;
+  color:var(--paper);
+  font-variation-settings:"opsz" 144;
 }
 .hero-title strong{
   font-style:normal;
   font-weight:500;
-  color:var(--sand);
+  color:var(--gold);
+  font-variation-settings:"opsz" 144;
 }
-.hero-departure{
+.hero-trail{
   display:flex;
   align-items:center;
-  gap:24px;
-  padding:32px 0;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  margin-bottom:32px;
-  flex-wrap:wrap;
-}
-.dep-block .label{
+  gap:14px;
+  margin-bottom:clamp(16px, 3.5vw, 24px);
   font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:0.3em;
+  font-size:clamp(10px, 2.5vw, 12px);
+  letter-spacing:0.25em;
   text-transform:uppercase;
   color:var(--on-dark-soft);
-  margin-bottom:8px;
+  flex-wrap:wrap;
 }
-.dep-block .code{
-  font-family:var(--mono);
-  font-size:clamp(36px, 6vw, 56px);
-  font-weight:400;
-  color:var(--white);
-  line-height:1;
-  margin-bottom:8px;
-}
-.dep-block .city{
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  color:var(--on-dark);
-}
-.dep-arrow{
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  color:var(--terracotta);
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:0 16px;
-}
-.dep-arrow::after{
-  content:'';
-  width:60px;
+.hero-trail .dash{
+  flex:1;
+  min-width:60px;
+  max-width:200px;
   height:1px;
-  background:repeating-linear-gradient(90deg, var(--terracotta) 0, var(--terracotta) 4px, transparent 4px, transparent 10px);
+  background:repeating-linear-gradient(90deg, var(--coral) 0, var(--coral) 4px, transparent 4px, transparent 10px);
 }
-.dep-block.destination .code{color:var(--gold)}
-.dep-block.destination .city{font-style:italic;font-family:var(--display);text-transform:none;font-size:16px;letter-spacing:0;color:var(--on-dark)}
-
+.hero-trail .icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;height:22px;
+  color:var(--coral);
+}
 .hero-tag{
-  font-family:var(--mono);
-  font-size:12px;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(15px, 3.5vw, 19px);
   color:var(--on-dark);
+  max-width:580px;
+  line-height:1.45;
+  font-weight:400;
 }
 
 /* === SECTION === */
-section{
-  padding:110px 32px;
-  position:relative;
-}
+section{padding:var(--pad-y) var(--pad-x);position:relative}
 .wrap{max-width:1100px;margin:0 auto}
 .wrap-wide{max-width:1240px;margin:0 auto}
 .section-label{
   font-family:var(--mono);
-  font-size:11px;
+  font-size:clamp(10px, 2.5vw, 11px);
   letter-spacing:0.3em;
   text-transform:uppercase;
-  color:var(--terracotta);
-  margin-bottom:24px;
+  color:var(--coral);
+  margin-bottom:clamp(12px, 3vw, 18px);
   display:flex;align-items:center;gap:14px;
 }
 .section-label::before{
-  content:'';display:block;width:32px;height:1px;background:var(--terracotta);
+  content:'';display:block;width:32px;height:1px;background:var(--coral);
 }
 .section-title{
   font-family:var(--display);
-  font-size:clamp(38px, 6vw, 64px);
+  font-size:clamp(28px, 6vw, 52px);
   font-weight:400;
   font-style:italic;
   line-height:1.05;
-  margin-bottom:24px;
-  letter-spacing:-0.01em;
+  margin-bottom:clamp(14px, 3vw, 20px);
+  letter-spacing:-0.015em;
+  font-variation-settings:"opsz" 144;
 }
-.section-title strong{font-style:normal;font-weight:500}
+.section-title strong{
+  font-style:normal;font-weight:500;color:var(--teal);
+  font-variation-settings:"opsz" 144;
+}
 .section-sub{
-  font-size:17px;
-  max-width:640px;
-  color:var(--graphite-soft);
-  line-height:1.7;
+  font-size:clamp(15px, 3.6vw, 17px);
+  max-width:680px;
+  color:var(--ink-soft);
+  line-height:1.65;
 }
 
-/* === STORY === */
-.story{background:var(--sand)}
+/* === STORY: more compact === */
+.story{background:var(--paper)}
 .story-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
-  margin-top:60px;
-  align-items:start;
+  grid-template-columns:1.1fr 1fr;
+  gap:clamp(24px, 5vw, 48px);
+  margin-top:clamp(28px, 5vw, 40px);
+  align-items:center;
 }
 .story-text p{
-  margin-bottom:20px;
-  font-size:17px;
-  line-height:1.75;
-  color:var(--graphite-soft);
-}
-.story-card{
-  background:var(--white);
-  padding:36px;
-  border:1px solid var(--line-dark);
-  position:relative;
-}
-.story-card::before{
-  content:'';
-  position:absolute;top:-1px;left:-1px;
-  width:24px;height:24px;
-  border-top:2px solid var(--terracotta);
-  border-left:2px solid var(--terracotta);
-}
-.story-card::after{
-  content:'';
-  position:absolute;bottom:-1px;right:-1px;
-  width:24px;height:24px;
-  border-bottom:2px solid var(--terracotta);
-  border-right:2px solid var(--terracotta);
-}
-.card-label{
-  font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  color:var(--terracotta);
+  font-size:clamp(15px, 3.7vw, 17px);
+  line-height:1.7;
+  color:var(--ink-soft);
   margin-bottom:14px;
 }
-.card-title{
+.story-text p:last-child{margin-bottom:0}
+.story-text .lead{
   font-family:var(--display);
-  font-size:28px;
-  font-weight:500;
-  margin-bottom:20px;
-  line-height:1.2;
+  font-style:italic;
+  font-size:clamp(18px, 4.2vw, 22px);
+  color:var(--ink);
+  line-height:1.4;
+  font-weight:400;
+  margin-bottom:18px;
+  font-variation-settings:"opsz" 144;
 }
-.passport-row{
-  display:flex;
-  justify-content:space-between;
-  padding:14px 0;
-  border-bottom:1px dashed var(--line-dark);
-  font-family:var(--mono);
-  font-size:14px;
-}
-.passport-row:last-child{border-bottom:none}
-.passport-row .lbl{
-  color:var(--graphite);
-  opacity:0.6;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  font-size:11px;
-}
-.passport-row .val{
-  color:var(--graphite);
-  font-weight:500;
-}
-@media(max-width:780px){
-  .story-grid{grid-template-columns:1fr;gap:48px}
-}
-
-/* === PHOTOS — TRAVEL === */
-.photos-travel{
-  background:var(--sand-deep);
-}
-.travel-gallery{
-  margin-top:60px;
-  display:grid;
-  grid-template-columns:repeat(12, 1fr);
-  gap:20px;
-}
-.travel-item{
-  background:var(--graphite);
+.story-photo{
   position:relative;
+  aspect-ratio:3/4;
   overflow:hidden;
-  aspect-ratio:4/3;
-  border:1px solid var(--line-dark);
+  background:var(--paper-deep);
+  box-shadow:0 20px 50px -20px rgba(14,26,43,0.25);
 }
-.travel-item.large{grid-column:span 7;aspect-ratio:16/11}
-.travel-item.medium{grid-column:span 5;aspect-ratio:4/5}
-.travel-item.wide{grid-column:span 8;aspect-ratio:16/9}
-.travel-item.small{grid-column:span 4;aspect-ratio:1/1}
-.travel-item.tall{grid-column:span 4;aspect-ratio:3/4}
-.travel-item img{
-  width:100%;height:100%;object-fit:cover;
+.story-photo img{
+  width:100%;height:100%;
+  object-fit:cover;
   display:block;
   transition:transform 0.7s cubic-bezier(.2,.7,.2,1);
 }
-.travel-item:hover img{transform:scale(1.04)}
-.travel-placeholder{
-  width:100%;height:100%;
+.story-photo:hover img{transform:scale(1.03)}
+.story-photo .caption{
+  position:absolute;
+  bottom:14px;left:14px;
+  background:rgba(14,26,43,0.85);
+  color:var(--paper);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  padding:6px 12px;
+  backdrop-filter:blur(6px);
+}
+.story-photo.placeholder{
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(233,107,74,0.4) 0%, transparent 60%),
+    linear-gradient(135deg, #2C7A78 0%, #1B2940 100%);
   display:flex;flex-direction:column;justify-content:space-between;
   padding:24px;
-  background:linear-gradient(135deg, #3a3a3a 0%, #2C2C2C 100%);
   color:var(--on-dark);
-  position:relative;
 }
-.travel-placeholder::before{
+.story-photo.placeholder::before{
   content:'';
   position:absolute;
   inset:14px;
-  border:1px dashed rgba(245,230,211,0.2);
-  pointer-events:none;
+  border:1px dashed rgba(250,245,236,0.3);
 }
-.tp-code{
+.story-photo.placeholder .ph-top{
   font-family:var(--mono);
-  font-size:42px;
-  font-weight:300;
-  color:var(--gold);
-  letter-spacing:0.02em;
-  line-height:1;
-}
-.tp-meta{
-  font-family:var(--mono);
-  font-size:10px;
+  font-size:clamp(10px, 2.5vw, 11px);
   letter-spacing:0.25em;
   text-transform:uppercase;
-  color:var(--on-dark-soft);
+  color:var(--paper);
+  position:relative;z-index:1;
 }
-.tp-name{
+.story-photo.placeholder .ph-mid{
   font-family:var(--display);
-  font-size:22px;
-  font-weight:500;
+  font-size:clamp(28px, 7vw, 36px);
   font-style:italic;
-  color:var(--white);
+  color:var(--paper);
+  font-weight:500;
+  line-height:1.05;
+  position:relative;z-index:1;
+  font-variation-settings:"opsz" 144;
 }
-.tp-hint{
+.story-photo.placeholder .ph-bot{
   font-family:var(--mono);
   font-size:9px;
   letter-spacing:0.2em;
   text-transform:uppercase;
-  color:var(--terracotta);
-  margin-top:8px;
-}
-@media(max-width:900px){
-  .travel-item.large,.travel-item.wide{grid-column:span 12;aspect-ratio:16/10}
-  .travel-item.medium,.travel-item.small,.travel-item.tall{grid-column:span 6;aspect-ratio:4/5}
-}
-@media(max-width:560px){
-  .travel-item.medium,.travel-item.small,.travel-item.tall{grid-column:span 12;aspect-ratio:4/3}
+  color:var(--gold);
+  position:relative;z-index:1;
 }
 
-/* === ROUTE / TIMELINE — HORIZONTAL === */
-.route-section{
-  background:var(--graphite);
-  color:var(--sand);
+/* Wedding photos: 4 in a tight row */
+.story-photos{
+  margin-top:clamp(24px, 5vw, 40px);
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr 1fr;
+  gap:clamp(8px, 1.6vw, 12px);
+}
+.sp-item{
+  position:relative;
   overflow:hidden;
+  background:var(--paper-deep);
+  aspect-ratio:3/4;
+  box-shadow:0 12px 30px -18px rgba(14,26,43,0.2);
+}
+.sp-item:first-child{aspect-ratio:1/1.1}
+.sp-item img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform 0.7s cubic-bezier(.2,.7,.2,1);
+}
+.sp-item:hover img{transform:scale(1.04)}
+@media(max-width:760px){
+  .story-grid{grid-template-columns:1fr;gap:24px}
+  .story-photo{aspect-ratio:4/3;max-width:100%}
+  .story-photos{grid-template-columns:1fr 1fr;gap:8px}
+  .sp-item, .sp-item:first-child{aspect-ratio:3/4}
+}
+
+/* compact summary inline at bottom */
+.story-summary{
+  margin-top:clamp(28px, 5vw, 40px);
+  padding:clamp(18px, 3.5vw, 24px);
+  background:var(--paper);
+  border:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:clamp(14px, 3vw, 24px);
+  position:relative;
+}
+.story-summary::before{
+  content:'';
+  position:absolute;top:-1px;left:-1px;
+  width:18px;height:18px;
+  border-top:2px solid var(--coral);
+  border-left:2px solid var(--coral);
+}
+.story-summary::after{
+  content:'';
+  position:absolute;bottom:-1px;right:-1px;
+  width:18px;height:18px;
+  border-bottom:2px solid var(--coral);
+  border-right:2px solid var(--coral);
+}
+.summary-cell .lbl{
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  margin-bottom:6px;
+  display:block;
+}
+.summary-cell .val{
+  font-family:var(--display);
+  font-size:clamp(15px, 3.5vw, 18px);
+  font-weight:500;
+  color:var(--ink);
+  line-height:1.2;
+  font-variation-settings:"opsz" 144;
+}
+.summary-cell .val.accent{color:var(--coral)}
+@media(max-width:560px){
+  .story-summary{grid-template-columns:1fr 1fr;gap:14px}
+}
+
+/* === ROUTE === */
+.route-section{
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(233,107,74,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 100%, rgba(44,122,120,0.18) 0%, transparent 55%),
+    linear-gradient(180deg, #0E1A2B 0%, #1B2940 100%);
+  color:var(--paper);
+  overflow:hidden;
+  padding-bottom:clamp(64px, 10vw, 100px);
 }
 .route-section .section-label{color:var(--gold)}
 .route-section .section-label::before{background:var(--gold)}
-.route-section .section-title{color:var(--white)}
+.route-section .section-title{color:var(--paper)}
+.route-section .section-title strong{color:var(--coral-soft)}
 .route-section .section-sub{color:var(--on-dark)}
 
 .timeline{
-  margin-top:64px;
+  margin-top:clamp(32px, 6vw, 56px);
   position:relative;
+  padding:0 clamp(8px, 4vw, 60px);
 }
 .timeline-svg{
   position:absolute;
@@ -431,408 +445,427 @@ section{
   flex-direction:column;
 }
 .day-divider{
-  display:flex;
-  align-items:center;
-  gap:20px;
-  padding:28px 0 20px;
+  display:flex;align-items:center;gap:16px;
+  padding:clamp(14px, 3.5vw, 22px) 0 clamp(10px, 3vw, 16px);
   font-family:var(--mono);
-  font-size:13px;
+  font-size:clamp(11px, 2.8vw, 13px);
   font-weight:500;
-  letter-spacing:0.3em;
+  letter-spacing:0.25em;
   text-transform:uppercase;
-  color:var(--terracotta);
+  color:var(--gold);
 }
 .day-divider::before, .day-divider::after{
   content:'';flex:1;height:1px;
-  background:rgba(224,122,95,0.3);
+  background:rgba(232,184,107,0.3);
 }
 .day-divider:first-child{padding-top:0}
 
 .stop{
   display:grid;
-  grid-template-columns:170px 60px 1fr;
+  grid-template-columns:200px 60px 1fr;
   align-items:center;
   gap:32px;
-  padding:22px 0;
+  padding:14px 0;
   position:relative;
 }
-.stop-time{
-  text-align:right;
-  font-family:var(--mono);
-}
+.stop-time{text-align:right;font-family:var(--mono)}
 .stop-time .time{
-  font-size:28px;
+  font-size:clamp(18px, 3.6vw, 26px);
   font-weight:400;
   color:var(--gold);
   letter-spacing:0.02em;
   line-height:1;
   display:block;
-  margin-bottom:8px;
+  margin-bottom:5px;
+  font-variant-numeric:tabular-nums;
 }
 .stop-time .day-label{
-  font-size:11px;
+  font-size:clamp(10px, 2.5vw, 11px);
   letter-spacing:0.25em;
   text-transform:uppercase;
   color:var(--on-dark-soft);
 }
-.stop-marker{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
+.stop-marker{display:flex;justify-content:center;align-items:center}
 .stop-dot{
-  width:14px;height:14px;
+  width:12px;height:12px;
   border-radius:50%;
-  background:var(--graphite);
-  border:2px solid var(--terracotta);
+  background:var(--ink-deep);
+  border:2px solid var(--coral);
   position:relative;
   z-index:3;
   transition:transform 0.3s, box-shadow 0.3s;
 }
 .stop:hover .stop-dot{
-  transform:scale(1.4);
-  box-shadow:0 0 0 6px rgba(224,122,95,0.15);
+  transform:scale(1.5);
+  box-shadow:0 0 0 6px rgba(233,107,74,0.18);
 }
 .stop-content{
   display:grid;
-  grid-template-columns:minmax(180px, 240px) 1fr;
-  gap:32px;
+  grid-template-columns:minmax(180px, 220px) 1fr;
+  gap:28px;
   align-items:baseline;
 }
 .stop-title{
   font-family:var(--display);
-  font-size:26px;
+  font-size:clamp(19px, 3.8vw, 24px);
   font-weight:500;
-  color:var(--white);
+  color:var(--paper);
   line-height:1.2;
+  font-variation-settings:"opsz" 144;
 }
 .stop-desc{
-  font-size:15px;
+  font-size:clamp(13px, 3.3vw, 15px);
   color:var(--on-dark);
-  line-height:1.6;
+  line-height:1.55;
 }
+.stop-desc a{
+  color:var(--coral-soft);
+  text-decoration:none;
+  border-bottom:1px solid currentColor;
+}
+.stop-desc a:hover{color:var(--gold)}
 
 @media(max-width:880px){
-  .stop{grid-template-columns:130px 40px 1fr;gap:20px}
-  .stop-time .time{font-size:22px}
-  .stop-content{grid-template-columns:1fr;gap:8px}
-  .stop-title{font-size:22px}
+  .stop{grid-template-columns:130px 36px 1fr;gap:18px;padding:12px 0}
+  .stop-content{grid-template-columns:1fr;gap:4px}
 }
 @media(max-width:600px){
-  .stop{grid-template-columns:90px 32px 1fr;gap:14px;padding:18px 0}
-  .stop-time .time{font-size:18px}
-  .stop-time .day-label{font-size:10px;letter-spacing:0.18em}
-  .stop-title{font-size:19px}
-  .stop-desc{font-size:14px}
+  .timeline{padding:0 4px}
+  .stop{
+    grid-template-columns:32px 1fr;
+    gap:14px;
+    padding:12px 0;
+    align-items:flex-start;
+  }
+  .stop-marker{
+    grid-column:1;
+    grid-row:1 / span 2;
+    padding-top:6px;
+  }
+  .stop-time{
+    grid-column:2;
+    grid-row:1;
+    text-align:left;
+    margin-bottom:2px;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .stop-time .time{font-size:16px;margin-bottom:0}
+  .stop-time .day-label{font-size:9px;letter-spacing:0.18em}
+  .stop-content{grid-column:2;grid-row:2;gap:4px}
+  .stop-title{font-size:17px;line-height:1.25}
+  .stop-desc{font-size:13.5px}
 }
 
-/* === DESTINATION === */
-.destination{background:var(--sand-deep)}
+/* === DESTINATION (compact two-col) === */
+.destination{background:var(--paper-deep)}
 .dest-grid{
   display:grid;
-  grid-template-columns:1.2fr 1fr;
-  gap:60px;
-  margin-top:60px;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(28px, 5vw, 48px);
+  margin-top:clamp(28px, 5vw, 40px);
   align-items:start;
 }
 .dest-info p{
-  font-size:17px;
-  line-height:1.75;
-  color:var(--graphite-soft);
-  margin-bottom:18px;
+  font-size:clamp(15px, 3.6vw, 16px);
+  line-height:1.65;
+  color:var(--ink-soft);
+  margin-bottom:14px;
 }
+.dest-info p:last-child{margin-bottom:0}
+.dest-side{display:flex;flex-direction:column;gap:16px}
 .dest-meta{
-  background:var(--white);
-  padding:32px;
-  border:1px solid var(--line-dark);
+  background:var(--paper);
+  padding:clamp(20px, 4vw, 24px);
+  border:1px solid var(--line);
 }
 .dest-meta-row{
   display:grid;
-  grid-template-columns:1fr 1.2fr;
+  grid-template-columns:auto 1fr;
   gap:16px;
-  padding:14px 0;
-  border-bottom:1px dashed var(--line-dark);
-  font-size:13px;
+  padding:10px 0;
+  border-bottom:1px dashed var(--line);
+  font-size:clamp(13px, 3.2vw, 14px);
+  align-items:baseline;
 }
 .dest-meta-row:last-child{border-bottom:none}
 .dest-meta-row .lbl{
   font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:0.2em;
+  font-size:clamp(9px, 2.3vw, 10px);
+  letter-spacing:0.18em;
   text-transform:uppercase;
-  color:var(--graphite);
-  opacity:0.55;
-  padding-top:2px;
+  color:var(--ink-mute);
+  white-space:nowrap;
 }
-.dest-meta-row .val{color:var(--graphite);line-height:1.5}
-.dest-meta-row .val a{color:var(--terracotta);text-decoration:none;border-bottom:1px solid currentColor}
-@media(max-width:780px){
-  .dest-grid{grid-template-columns:1fr;gap:36px}
-}
+.dest-meta-row .val{color:var(--ink);line-height:1.4;text-align:right}
+.dest-meta-row .val a{color:var(--coral);text-decoration:none;border-bottom:1px solid currentColor}
 
-/* === PHOTOS — WEDDING (1 APRIL) === */
-.photos-wedding{
-  background:var(--white);
-  padding:110px 32px;
-}
-.wedding-gallery{
-  margin-top:60px;
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:20px;
-}
-.wedding-item{
-  background:var(--graphite);
-  aspect-ratio:3/4;
+.dest-map{
   position:relative;
+  aspect-ratio:5/3;
   overflow:hidden;
-  border:1px solid var(--line-dark);
+  border:1px solid var(--line);
+  background:var(--paper-deep);
+  box-shadow:0 16px 40px -22px rgba(14,26,43,0.25);
 }
-.wedding-item.feature{
-  grid-row:span 2;
-  aspect-ratio:3/5;
+.dest-map iframe{
+  width:100%;height:100%;border:0;
+  filter:saturate(0.9) contrast(0.95);
 }
-.wedding-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s}
-.wedding-item:hover img{transform:scale(1.04)}
-.wedding-placeholder{
-  width:100%;height:100%;
-  background:linear-gradient(135deg, #3a3a3a 0%, #2C2C2C 100%);
-  color:var(--on-dark);
-  display:flex;flex-direction:column;justify-content:space-between;
-  padding:24px;
-  position:relative;
-}
-.wedding-placeholder::before{
-  content:'';
-  position:absolute;inset:14px;
-  border:1px dashed rgba(245,230,211,0.2);
-  pointer-events:none;
-}
-.wp-stamp{
-  font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  color:var(--gold);
-}
-.wp-mid{
-  font-family:var(--display);
-  font-size:24px;
-  font-style:italic;
-  color:var(--white);
-  font-weight:400;
-  line-height:1.2;
-}
-.wp-bottom{
+.map-pin-info{
+  position:absolute;
+  bottom:12px;left:12px;
+  background:var(--paper);
+  padding:8px 12px;
   font-family:var(--mono);
   font-size:9px;
-  letter-spacing:0.2em;
+  letter-spacing:0.15em;
   text-transform:uppercase;
-  color:var(--terracotta);
+  color:var(--ink);
+  border-left:3px solid var(--coral);
+  pointer-events:none;
+  max-width:80%;
 }
-@media(max-width:780px){
-  .wedding-gallery{grid-template-columns:repeat(2, 1fr)}
-  .wedding-item.feature{grid-row:span 1;aspect-ratio:3/4}
-}
-@media(max-width:480px){
-  .wedding-gallery{grid-template-columns:1fr}
+.map-pin-info strong{
+  display:block;
+  font-family:var(--display);
+  font-size:14px;
+  font-weight:500;
+  text-transform:none;
+  letter-spacing:0;
+  color:var(--teal);
+  margin-bottom:1px;
+  font-variation-settings:"opsz" 144;
 }
 
-/* === LOGISTICS === */
-.logistics{background:var(--sand)}
+@media(max-width:880px){
+  .dest-grid{grid-template-columns:1fr;gap:24px}
+}
+
+/* === LOGISTICS (2 wide cards) === */
+.logistics{background:var(--paper)}
 .log-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-  gap:24px;
-  margin-top:60px;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(14px, 3vw, 20px);
+  margin-top:clamp(28px, 5vw, 40px);
 }
 .log-card{
-  background:var(--white);
-  padding:32px;
-  border:1px solid var(--line-dark);
+  background:var(--paper);
+  padding:clamp(22px, 4vw, 28px);
+  border:1px solid var(--line);
   position:relative;
+  transition:transform 0.3s, box-shadow 0.3s;
+}
+.log-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px -15px rgba(14,26,43,0.15);
 }
 .log-num{
   font-family:var(--mono);
-  font-size:11px;
+  font-size:clamp(10px, 2.5vw, 11px);
   letter-spacing:0.25em;
-  color:var(--terracotta);
-  margin-bottom:18px;
+  color:var(--coral);
+  margin-bottom:14px;
 }
 .log-title{
   font-family:var(--display);
-  font-size:24px;
+  font-size:clamp(20px, 4.5vw, 24px);
   font-weight:500;
-  margin-bottom:14px;
+  margin-bottom:12px;
   line-height:1.25;
+  font-variation-settings:"opsz" 144;
 }
 .log-text{
-  font-size:14px;
-  line-height:1.65;
-  color:var(--graphite-soft);
+  font-size:clamp(13px, 3.4vw, 14px);
+  line-height:1.6;
+  color:var(--ink-soft);
+  margin-bottom:12px;
 }
-.log-text strong{
-  color:var(--graphite);
-  font-weight:500;
+.log-text:last-child{margin-bottom:0}
+.log-text strong{color:var(--ink);font-weight:500}
+
+/* sub-blocks inside one card */
+.log-sub{
+  border-top:1px dashed var(--line);
+  padding-top:14px;
+  margin-top:14px;
 }
-.log-card .contact-row{
+.log-sub-title{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--coral);
+  margin-bottom:10px;
+}
+
+.contact-row{
   display:flex;
   justify-content:space-between;
   padding:8px 0;
-  font-size:13px;
-  border-bottom:1px dashed var(--line-dark);
+  font-size:clamp(12px, 3vw, 13px);
+  border-bottom:1px dashed var(--line);
+  gap:12px;
 }
-.log-card .contact-row:last-child{border-bottom:none}
-.log-card .contact-row .role{
+.contact-row:last-child{border-bottom:none}
+.contact-row .role{
   font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:0.2em;
+  font-size:clamp(10px, 2.5vw, 11px);
+  letter-spacing:0.18em;
   text-transform:uppercase;
-  color:var(--graphite);
-  opacity:0.6;
-  padding-top:2px;
+  color:var(--ink-mute);
+  padding-top:3px;
+  flex-shrink:0;
 }
-.log-card .contact-row .person{
+.contact-row .person{
   text-align:right;
-  color:var(--graphite);
+  color:var(--ink);
   line-height:1.4;
 }
-.log-card .contact-row .person small{
+.contact-row .person small{
   display:block;
-  color:var(--terracotta);
+  color:var(--coral);
   font-family:var(--mono);
-  font-size:11px;
-  margin-top:2px;
+  font-size:clamp(11px, 2.8vw, 12px);
+  margin-top:1px;
+}
+.contact-row .person a{
+  color:var(--coral);
+  text-decoration:none;
+  border-bottom:1px solid currentColor;
 }
 
-/* === DRESS CODE === */
+@media(max-width:760px){
+  .log-grid{grid-template-columns:1fr}
+}
+
+/* === DRESS CODE (compact, single block) === */
 .dress{
-  background:var(--graphite);
-  color:var(--sand);
-  padding:110px 32px;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(232,184,107,0.1) 0%, transparent 55%),
+    linear-gradient(180deg, #1B2940 0%, #0E1A2B 100%);
+  color:var(--paper);
+  padding:var(--pad-y) var(--pad-x);
 }
 .dress .section-label{color:var(--gold)}
 .dress .section-label::before{background:var(--gold)}
-.dress .section-title{color:var(--white)}
+.dress .section-title{color:var(--paper)}
+.dress .section-title strong{color:var(--coral-soft)}
 .dress .section-sub{color:var(--on-dark)}
 
 .dress-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:60px;
-  margin-top:60px;
+  gap:clamp(16px, 3vw, 28px);
+  margin-top:clamp(28px, 5vw, 40px);
 }
 .dress-day{
-  border:1px solid var(--line);
-  padding:36px;
+  border:1px solid rgba(250,245,236,0.18);
+  padding:clamp(20px, 4vw, 28px);
   position:relative;
+  background:rgba(250,245,236,0.025);
+}
+.dress-day-head{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:6px;
 }
 .dress-day-num{
   font-family:var(--mono);
-  font-size:60px;
+  font-size:clamp(28px, 5.5vw, 36px);
   font-weight:300;
   color:var(--gold);
   line-height:1;
-  margin-bottom:16px;
 }
 .dress-day-title{
   font-family:var(--display);
-  font-size:24px;
+  font-size:clamp(20px, 4.5vw, 24px);
   font-weight:500;
-  color:var(--white);
-  margin-bottom:8px;
+  color:var(--paper);
+  font-variation-settings:"opsz" 144;
 }
 .dress-day-mood{
   font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:0.25em;
+  font-size:clamp(10px, 2.5vw, 11px);
+  letter-spacing:0.22em;
   text-transform:uppercase;
-  color:var(--terracotta);
-  margin-bottom:24px;
+  color:var(--coral-soft);
+  margin-bottom:18px;
 }
 .dress-list{list-style:none}
 .dress-list li{
-  padding:10px 0;
-  border-bottom:1px dashed var(--line);
-  font-size:14px;
+  padding:9px 0;
+  border-bottom:1px dashed rgba(250,245,236,0.16);
+  font-size:clamp(13px, 3.4vw, 14px);
   color:var(--on-dark);
-  display:flex;
-  justify-content:space-between;
-  gap:16px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:12px;
   line-height:1.5;
+  align-items:start;
 }
 .dress-list li:last-child{border-bottom:none}
 .dress-list .lbl{
   font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:0.2em;
+  font-size:clamp(9px, 2.3vw, 10px);
+  letter-spacing:0.18em;
   text-transform:uppercase;
   color:var(--on-dark-soft);
-  flex-shrink:0;
-  padding-top:2px;
+  padding-top:3px;
+  white-space:nowrap;
 }
-.dress-list .val{text-align:right;flex:1}
+.dress-list .val{color:var(--on-dark)}
 .dress-note{
-  font-size:13px;
+  font-size:clamp(12px, 3vw, 13px);
   color:var(--on-dark-soft);
-  margin-top:20px;
-  padding-top:20px;
-  border-top:1px dashed var(--line);
-  line-height:1.6;
+  margin-top:14px;
+  padding-top:12px;
+  border-top:1px dashed rgba(250,245,236,0.16);
+  line-height:1.55;
   font-style:italic;
 }
-.palette{
-  display:flex;
-  gap:8px;
-  margin-top:24px;
+@media(max-width:760px){
+  .dress-grid{grid-template-columns:1fr;gap:14px}
 }
-.palette span{
-  width:32px;height:32px;
-  border:1px solid var(--line);
-  display:block;
-}
-@media(max-width:780px){
-  .dress-grid{grid-template-columns:1fr;gap:32px}
-  .dress-list li{flex-direction:column;gap:4px}
-  .dress-list .val{text-align:left}
+@media(max-width:480px){
+  .dress-list li{grid-template-columns:1fr;gap:3px}
 }
 
 /* === FAQ === */
 .faq-section{
-  background:var(--sand-deep);
-  padding:110px 32px;
+  background:var(--paper-deep);
+  padding:var(--pad-y) var(--pad-x);
 }
 .faq-list{
-  margin-top:48px;
-  border-top:1px solid var(--line-dark);
+  margin-top:clamp(24px, 5vw, 36px);
+  border-top:1px solid var(--line);
 }
-.faq-item{
-  border-bottom:1px solid var(--line-dark);
-}
+.faq-item{border-bottom:1px solid var(--line)}
 .faq-q{
-  width:100%;
-  background:transparent;
-  border:none;
-  padding:24px 60px 24px 0;
+  width:100%;background:transparent;border:none;
+  padding:clamp(14px, 3.5vw, 20px) clamp(36px, 6vw, 50px) clamp(14px, 3.5vw, 20px) 0;
   font-family:var(--display);
-  font-size:22px;
+  font-size:clamp(16px, 4vw, 20px);
   font-weight:500;
-  color:var(--graphite);
+  color:var(--ink);
   text-align:left;
   cursor:pointer;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:24px;
-  position:relative;
+  gap:20px;
   transition:color 0.2s;
   line-height:1.3;
+  font-variation-settings:"opsz" 144;
 }
-.faq-q:hover{color:var(--terracotta)}
+.faq-q:hover{color:var(--coral)}
 .faq-toggle{
   font-family:var(--mono);
   font-size:18px;
-  color:var(--terracotta);
+  color:var(--coral);
   flex-shrink:0;
   transition:transform 0.3s;
   font-weight:300;
@@ -842,315 +875,221 @@ section{
   max-height:0;
   overflow:hidden;
   transition:max-height 0.4s ease, padding 0.4s ease;
-  font-size:16px;
-  line-height:1.7;
-  color:var(--graphite-soft);
-  padding:0 60px 0 0;
+  font-size:clamp(14px, 3.5vw, 15px);
+  line-height:1.65;
+  color:var(--ink-soft);
+  padding:0 clamp(36px, 6vw, 50px) 0 0;
 }
 .faq-item.open .faq-a{
-  max-height:500px;
-  padding:0 60px 28px 0;
+  max-height:600px;
+  padding:0 clamp(36px, 6vw, 50px) clamp(16px, 3.5vw, 22px) 0;
 }
-.faq-a strong{color:var(--graphite);font-weight:500}
-@media(max-width:600px){
-  .faq-q{font-size:18px;padding:20px 40px 20px 0}
-  .faq-a{font-size:15px;padding-right:0}
-  .faq-item.open .faq-a{padding-bottom:24px;padding-right:0}
-}
+.faq-a strong{color:var(--ink);font-weight:500}
 
-/* === GIFTS BLOCK === */
-.gifts-section{
-  background:var(--white);
-  padding:110px 32px;
-}
-.gifts-grid{
-  margin-top:60px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-}
-.gift-card{
-  background:var(--sand);
-  padding:40px;
-  border:1px solid var(--line-dark);
-  position:relative;
-}
-.gift-num{
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:0.25em;
-  color:var(--terracotta);
-  margin-bottom:18px;
-}
-.gift-title{
-  font-family:var(--display);
-  font-size:30px;
-  font-weight:500;
-  margin-bottom:14px;
-  line-height:1.2;
-}
-.gift-text{
-  font-size:15px;
-  line-height:1.7;
-  color:var(--graphite-soft);
-}
-.gift-text strong{color:var(--graphite);font-weight:500}
-@media(max-width:780px){
-  .gifts-grid{grid-template-columns:1fr}
-}
-
-/* === RSVP / FOOTER === */
+/* === RSVP === */
 .rsvp{
-  background:var(--terracotta);
-  color:var(--white);
-  padding:110px 32px;
+  background:
+    radial-gradient(ellipse at 20% 100%, rgba(232,184,107,0.25) 0%, transparent 55%),
+    linear-gradient(135deg, var(--coral) 0%, #D14E2C 100%);
+  color:var(--paper);
+  padding:var(--pad-y) var(--pad-x);
   text-align:center;
+  position:relative;
+  overflow:hidden;
 }
-.rsvp .section-label{color:var(--white);justify-content:center}
-.rsvp .section-label::before{background:var(--white)}
+.rsvp::before{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 30% 40%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 70% 70%, rgba(255,255,255,0.25), transparent),
+    radial-gradient(1px 1px at 50% 20%, rgba(255,255,255,0.4), transparent);
+  pointer-events:none;
+}
+.rsvp > *{position:relative;z-index:1}
+.rsvp .section-label{color:var(--paper);justify-content:center}
+.rsvp .section-label::before{background:var(--paper)}
 .rsvp-title{
   font-family:var(--display);
-  font-size:clamp(40px, 6vw, 72px);
-  font-weight:400;
+  font-size:clamp(32px, 7vw, 56px);
+  font-weight:500;
   font-style:italic;
-  margin-bottom:24px;
+  margin-bottom:18px;
   line-height:1.1;
+  color:var(--paper);
+  font-variation-settings:"opsz" 144;
 }
 .rsvp-text{
-  font-size:18px;
-  max-width:580px;
-  margin:0 auto 40px;
-  line-height:1.7;
-  color:rgba(255,255,255,0.95);
+  font-size:clamp(14px, 3.5vw, 17px);
+  max-width:600px;
+  margin:0 auto 28px;
+  line-height:1.6;
+  color:rgba(250,245,236,0.95);
 }
 .rsvp-deadline{
   font-family:var(--mono);
-  font-size:12px;
+  font-size:clamp(11px, 2.8vw, 12px);
   letter-spacing:0.3em;
   text-transform:uppercase;
-  margin-bottom:32px;
-  color:rgba(255,255,255,0.95);
+  margin-bottom:24px;
+  color:rgba(250,245,236,0.95);
 }
 .rsvp-btn{
   display:inline-block;
-  background:var(--graphite);
-  color:var(--sand);
-  padding:18px 48px;
+  background:var(--ink-deep);
+  color:var(--paper);
+  padding:clamp(14px, 3.5vw, 16px) clamp(32px, 7vw, 44px);
   font-family:var(--mono);
-  font-size:12px;
+  font-size:clamp(11px, 2.8vw, 12px);
   letter-spacing:0.3em;
   text-transform:uppercase;
   text-decoration:none;
-  border:1px solid var(--graphite);
+  border:1px solid var(--ink-deep);
   transition:all 0.3s ease;
 }
-.rsvp-btn:hover{
-  background:transparent;
-  color:var(--white);
-  border-color:var(--white);
+.rsvp-btn:hover, .rsvp-btn:active{
+  background:var(--gold);
+  color:var(--ink-deep);
+  border-color:var(--gold);
 }
 .rsvp-contacts{
-  margin-top:48px;
-  display:flex;
-  gap:32px;
+  margin-top:clamp(24px, 5vw, 36px);
+  display:flex;gap:clamp(16px, 4vw, 32px);
   justify-content:center;
   font-family:var(--mono);
-  font-size:12px;
+  font-size:clamp(11px, 2.8vw, 12px);
   letter-spacing:0.15em;
   flex-wrap:wrap;
-  color:var(--white);
+  color:var(--paper);
 }
-.rsvp-contacts a{color:var(--white);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.4)}
 
 footer{
-  background:var(--graphite);
+  background:var(--ink-deep);
   color:var(--on-dark);
-  padding:40px 32px;
+  padding:clamp(20px, 4vw, 28px) var(--pad-x);
   text-align:center;
   font-family:var(--mono);
-  font-size:10px;
+  font-size:clamp(9px, 2.4vw, 10px);
   letter-spacing:0.25em;
   text-transform:uppercase;
 }
 
-/* reveal */
-.reveal{opacity:0;transform:translateY(24px);transition:all 0.9s cubic-bezier(.2,.7,.2,1)}
+.reveal{opacity:0;transform:translateY(20px);transition:all 0.8s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .board-dot{animation:none}
+}
 </style>
 </head>
 <body>
 
-<!-- FLIGHT BOARD -->
+<!-- BOARD -->
 <div class="board">
   <div class="board-left">
     <span class="board-dot"></span>
-    <span>Рейс DK 01042026</span>
-    <span class="board-hide">Терминал 1 · Гейт 1—7</span>
+    <span class="board-flight">DK 01042026</span>
   </div>
   <div class="board-right">
-    <span class="board-hide">16 авг 2026</span>
-    <span class="board-status">Посадка разрешена</span>
+    <span class="board-status"><span class="board-status-text">Посадка разрешена</span></span>
     <span class="board-time" id="clock">—</span>
   </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-grid"></div>
   <div class="hero-inner">
     <div class="hero-meta reveal">
-      <span>16—18 августа 2026</span>
+      <span>16—18 авг 2026</span>
       <span class="sep">/</span>
       <span>Pastorskoe Lake</span>
       <span class="sep">/</span>
-      <span>Санкт-Петербург</span>
+      <span>СПб</span>
     </div>
     <div class="hero-flight reveal">DK <em>·</em> 01042026</div>
     <h1 class="hero-title reveal">
       <strong>Дима и Кристина</strong><br>
-      приглашают вас на борт рейса
+      приглашают вас на свадьбу
     </h1>
 
-    <div class="hero-departure reveal">
-      <div class="dep-block">
-        <div class="label">Вылет</div>
-        <div class="code">PST</div>
-        <div class="city">Пасторское озеро</div>
-      </div>
-      <div class="dep-arrow"><span>В пути</span></div>
-      <div class="dep-block destination">
-        <div class="label">Прибытие</div>
-        <div class="code">···</div>
-        <div class="city">У каждого свой гейт</div>
-      </div>
+    <div class="hero-trail reveal">
+      <span class="dash"></span>
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+          <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+        </svg>
+      </span>
+      <span class="dash"></span>
     </div>
 
-    <div class="hero-tag reveal">Посадка разрешена</div>
+    <div class="hero-tag reveal">
+      Три дня у воды, в лесу, в хорошей компании.
+    </div>
   </div>
 </section>
 
-<!-- STORY -->
+<!-- STORY (compact: 2 columns + 4 photos + summary strip) -->
 <section class="story">
   <div class="wrap">
     <div class="section-label reveal">Лог полёта · 01</div>
-    <h2 class="section-title reveal">Если коротко — <strong>мы летим</strong></h2>
-    <p class="section-sub reveal">
-      Мы любим путешествовать. ЮАР, Таиланд, Египет, Италия, Беларусь — каждая поездка про что-то наше.
-      В одну из них, на Столовой горе, Дима сделал предложение. А 1 апреля 2026 мы расписались — и сделали вид, что это шутка. Но это не игры — здесь всё серьёзно.
-    </p>
+    <h2 class="section-title reveal">Мы уже летим — <strong>и зовём вас с собой</strong></h2>
 
     <div class="story-grid">
       <div class="story-text reveal">
-        <p>
-          16, 17 и 18 августа 2026 мы собираем самых близких в Пасторском озере под Санкт-Петербургом — чтобы наконец-то отметить всё это вслух, не разыгрывая никого.
+        <p class="lead">
+          Мы любим путешествовать. ЮАР, Таиланд, Италия — каждая поездка про что-то наше. На Столовой горе Дима сделал предложение.
         </p>
         <p>
-          Будет короткая церемония, длинный ужин, второй день у воды и третий — на медленный сбор. Без официоза, без долгих программ, без «а теперь все встали».
+          1 апреля 2026 мы расписались — выложили фото, все решили, что шутка. Не шутка. А 16—18 августа собираем самых близких в Пасторском озере: три дня у воды, без спешки, без официоза.
         </p>
         <p>
-          Концепция простая: это не свадьба, это рейс. У каждого — свой гейт, у каждого дня — своё расписание. Лететь будем в счастье. Прямой, без пересадок.
+          Места уже забронированы, маршрут проложен — осталось только взлететь вместе.
         </p>
       </div>
 
-      <div class="story-card reveal">
-        <div class="card-label">Маршрутная квитанция</div>
-        <h3 class="card-title">Сводка по рейсу</h3>
-        <div class="passport-row"><span class="lbl">Рейс</span><span class="val">DK 01042026</span></div>
-        <div class="passport-row"><span class="lbl">Дата</span><span class="val">16—18 авг 2026</span></div>
-        <div class="passport-row"><span class="lbl">Вылет</span><span class="val">PST · Пасторское озеро</span></div>
-        <div class="passport-row"><span class="lbl">Прибытие</span><span class="val">У каждого свой гейт</span></div>
-        <div class="passport-row"><span class="lbl">Статус</span><span class="val" style="color:var(--terracotta)">Посадка разрешена</span></div>
+      <!-- Замените на: <div class="story-photo"><img src="assets/table-mountain.jpg" alt="Столовая гора, ЮАР" /><div class="caption">ZA · Cape Town</div></div> -->
+      <div class="story-photo placeholder reveal">
+        <div class="ph-top">ZA · Cape Town</div>
+        <div class="ph-mid">«Yes»<br><em>here</em></div>
+        <div class="ph-bot">[фото со Столовой горы]</div>
+      </div>
+    </div>
+
+    <div class="story-photos">
+      <div class="sp-item reveal"><img src="assets/wedding-1.jpg" alt="01.04.2026 — церемония" loading="lazy" /></div>
+      <div class="sp-item reveal"><img src="assets/wedding-fun.jpg" alt="«Это розыгрыш» — нет" loading="lazy" /></div>
+      <div class="sp-item reveal"><img src="assets/wedding-3.jpg" alt="01.04.2026" loading="lazy" /></div>
+      <div class="sp-item reveal"><img src="assets/wedding-4.jpg" alt="01.04.2026" loading="lazy" /></div>
+    </div>
+
+    <div class="story-summary reveal">
+      <div class="summary-cell">
+        <span class="lbl">Рейс</span>
+        <span class="val">DK 01042026</span>
+      </div>
+      <div class="summary-cell">
+        <span class="lbl">Дата</span>
+        <span class="val">16—18 авг 2026</span>
+      </div>
+      <div class="summary-cell">
+        <span class="lbl">Вылет</span>
+        <span class="val">Пасторское озеро</span>
+      </div>
+      <div class="summary-cell">
+        <span class="lbl">Статус</span>
+        <span class="val accent">Посадка разрешена</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PHOTOS — TRAVEL -->
-<section class="photos-travel">
-  <div class="wrap-wide">
-    <div class="section-label reveal">Архив рейсов · 02</div>
-    <h2 class="section-title reveal">Где мы <strong>уже были</strong></h2>
-    <p class="section-sub reveal">
-      Каждая поездка оставила след — на коже, в телефоне, в общих воспоминаниях. Это всё стало частью нашей истории.
-    </p>
-
-    <div class="travel-gallery">
-      <!-- Замените содержимое .travel-placeholder на <img src="..." alt="..."> -->
-      <div class="travel-item large reveal">
-        <div class="travel-placeholder">
-          <div>
-            <div class="tp-meta">ZA · Cape Town</div>
-          </div>
-          <div>
-            <div class="tp-code">ZA</div>
-            <div class="tp-name">ЮАР</div>
-            <div class="tp-hint">Столовая гора · здесь было «да»</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="travel-item medium reveal">
-        <div class="travel-placeholder">
-          <div><div class="tp-meta">TH</div></div>
-          <div>
-            <div class="tp-code">TH</div>
-            <div class="tp-name">Таиланд</div>
-            <div class="tp-hint">[вставить фото]</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="travel-item small reveal">
-        <div class="travel-placeholder">
-          <div><div class="tp-meta">EG</div></div>
-          <div>
-            <div class="tp-code">EG</div>
-            <div class="tp-name">Египет</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="travel-item small reveal">
-        <div class="travel-placeholder">
-          <div><div class="tp-meta">IT</div></div>
-          <div>
-            <div class="tp-code">IT</div>
-            <div class="tp-name">Италия</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="travel-item wide reveal">
-        <div class="travel-placeholder">
-          <div><div class="tp-meta">BY · Минск</div></div>
-          <div>
-            <div class="tp-code">BY</div>
-            <div class="tp-name">Беларусь</div>
-            <div class="tp-hint">[вставить фото]</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="travel-item small reveal">
-        <div class="travel-placeholder">
-          <div><div class="tp-meta">RU</div></div>
-          <div>
-            <div class="tp-code">RU</div>
-            <div class="tp-name">Россия</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ROUTE / TIMELINE -->
+<!-- ROUTE -->
 <section class="route-section" id="route">
   <div class="wrap-wide">
-    <div class="section-label reveal">Расписание · 03</div>
+    <div class="section-label reveal">Расписание · 02</div>
     <h2 class="section-title reveal">Маршрут <strong>трёх дней</strong></h2>
     <p class="section-sub reveal">
-      Точное расписание выдаётся на регистрации. Здесь — общий маршрут, чтобы вы понимали, как лететь и не пропустить ничего важного.
+      Здесь — общий маршрут, чтобы вы понимали тайминг и не пропустили ничего важного.
     </p>
 
     <div class="timeline" id="timeline">
@@ -1158,7 +1097,7 @@ footer{
 
       <div class="timeline-stops" id="stops">
 
-        <div class="day-divider reveal">Суббота · 16 августа</div>
+        <div class="day-divider reveal">Сб · 16 августа</div>
 
         <div class="stop reveal">
           <div class="stop-time">
@@ -1168,7 +1107,7 @@ footer{
           <div class="stop-marker"><div class="stop-dot"></div></div>
           <div class="stop-content">
             <div class="stop-title">Регистрация на рейс</div>
-            <div class="stop-desc">Заезд, заселение в коттеджи, получение посадочного талона.</div>
+            <div class="stop-desc">Заселение в коттеджи, получение посадочного талона.</div>
           </div>
         </div>
 
@@ -1192,23 +1131,23 @@ footer{
           <div class="stop-marker"><div class="stop-dot"></div></div>
           <div class="stop-content">
             <div class="stop-title">Церемония у озера</div>
-            <div class="stop-desc">Короткая, тёплая. Без долгих речей. Самая важная часть рейса — взлёт.</div>
+            <div class="stop-desc">Короткая, тёплая. Без долгих речей.</div>
           </div>
         </div>
 
         <div class="stop reveal">
           <div class="stop-time">
-            <span class="time">17:30</span>
+            <span class="time">17:30—22:00</span>
             <span class="day-label">Банкет</span>
           </div>
           <div class="stop-marker"><div class="stop-dot"></div></div>
           <div class="stop-content">
             <div class="stop-title">Банкет</div>
-            <div class="stop-desc">Ужин, тосты, музыка, лотерея по посадочным талонам. Каждый стол — своя страна. До 22:00.</div>
+            <div class="stop-desc">Основная часть вечера.</div>
           </div>
         </div>
 
-        <div class="day-divider reveal">Воскресенье · 17 августа</div>
+        <div class="day-divider reveal">Вс · 17 августа</div>
 
         <div class="stop reveal">
           <div class="stop-time">
@@ -1217,8 +1156,8 @@ footer{
           </div>
           <div class="stop-marker"><div class="stop-dot"></div></div>
           <div class="stop-content">
-            <div class="stop-title">Свободный эшелон</div>
-            <div class="stop-desc">Завтрак самостоятельно. На сайте клуба — сапы, лодки, баня, массаж, гончарка и многое другое. Загляните, выберите, что хочется, и забронируйте через нашего координатора.</div>
+            <div class="stop-title">Размеренное утро</div>
+            <div class="stop-desc">Завтрак в домике или в кафе. Озеро, развлечения <a href="https://pastorskoelake.ru/leisure" target="_blank" rel="noopener">на сайте клуба</a> — бронируйте через координатора.</div>
           </div>
         </div>
 
@@ -1230,11 +1169,11 @@ footer{
           <div class="stop-marker"><div class="stop-dot"></div></div>
           <div class="stop-content">
             <div class="stop-title">Шашлыки у воды</div>
-            <div class="stop-desc">Проводим время вместе, делимся впечатлениями о вчерашнем вечере, отдыхаем без программы.</div>
+            <div class="stop-desc">Время вместе, впечатления вчерашнего дня, без программы.</div>
           </div>
         </div>
 
-        <div class="day-divider reveal">Понедельник · 18 августа</div>
+        <div class="day-divider reveal">Пн · 18 августа</div>
 
         <div class="stop reveal">
           <div class="stop-time">
@@ -1244,7 +1183,7 @@ footer{
           <div class="stop-marker"><div class="stop-dot"></div></div>
           <div class="stop-content">
             <div class="stop-title">Прибытие · выезд</div>
-            <div class="stop-desc">Выезд из коттеджей до 14:00. Спасибо, что были рядом весь полёт.</div>
+            <div class="stop-desc">Спасибо, что были рядом весь полёт.</div>
           </div>
         </div>
       </div>
@@ -1252,237 +1191,148 @@ footer{
   </div>
 </section>
 
-<!-- DESTINATION -->
+<!-- DESTINATION (compact) -->
 <section class="destination">
   <div class="wrap">
-    <div class="section-label reveal">Точка назначения · 04</div>
+    <div class="section-label reveal">Место проведения · 03</div>
     <h2 class="section-title reveal">Загородный клуб <strong>«Пасторское озеро»</strong></h2>
 
     <div class="dest-grid">
       <div class="dest-info reveal">
         <p>
-          Лес, озеро, двухэтажный ресторан с открытой террасой. Площадка, где можно просто остаться на все три дня и никуда не спешить.
+          Хвойный лес и чистое озеро в получасе от Санкт-Петербурга, 39 км Выборгского шоссе. Здесь нет ощущения «арендованного зала» — это настоящий загородный клуб, где можно остаться на три дня и никуда не торопиться.
         </p>
         <p>
-          Парковка бесплатная. Трансфер мы не организуем — лучше всего проверить маршрут заранее в навигаторе и заложить чуть больше времени, чем покажет приложение.
+          Банкет — в ресторане с террасой и панорамным видом на озеро. Церемония — там же, у воды. Все гости живут на территории, в коттеджах в лесу, в нескольких минутах от ресторана.
         </p>
         <p>
-          На территории — баня, сапы, лодки, беседки с грилем, массажный кабинет. Активности на второй день — по желанию, бронирование и оплата самостоятельно через нашего координатора.
+          На территории — спа, бани, сапы, гончарная мастерская и многое другое. Второй день — в полном вашем распоряжении.
         </p>
       </div>
 
-      <div class="dest-meta reveal">
-        <div class="dest-meta-row">
-          <span class="lbl">Адрес</span>
-          <span class="val">Ленинградская область,<br>Выборгское шоссе, 39 км</span>
+      <div class="dest-side reveal">
+        <div class="dest-map">
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?ll=29.713%2C60.420&z=12&pt=29.713%2C60.420%2Cflag&l=map"
+            allowfullscreen
+            loading="lazy"
+            title="Пасторское озеро на карте"></iframe>
+          <div class="map-pin-info">
+            <strong>Пасторское озеро</strong>
+            Выборгское ш., 39 км
+          </div>
         </div>
-        <div class="dest-meta-row">
-          <span class="lbl">Сайт</span>
-          <span class="val"><a href="https://pastorskoerest.ru" target="_blank" rel="noopener">pastorskoerest.ru</a></span>
-        </div>
-        <div class="dest-meta-row">
-          <span class="lbl">Активности</span>
-          <span class="val"><a href="https://pastorskoelake.ru/leisure" target="_blank" rel="noopener">pastorskoelake.ru/leisure</a></span>
-        </div>
-        <div class="dest-meta-row">
-          <span class="lbl">Ресепшн</span>
-          <span class="val">+7 (812) 602-79-66</span>
-        </div>
-        <div class="dest-meta-row">
-          <span class="lbl">Дорога</span>
-          <span class="val">Проверьте маршрут<br>в навигаторе</span>
-        </div>
-        <div class="dest-meta-row">
-          <span class="lbl">Парковка</span>
-          <span class="val">Бесплатная, на территории</span>
+
+        <div class="dest-meta">
+          <div class="dest-meta-row">
+            <span class="lbl">Сайт</span>
+            <span class="val"><a href="https://pastorskoerest.ru" target="_blank" rel="noopener">pastorskoerest.ru</a></span>
+          </div>
+          <div class="dest-meta-row">
+            <span class="lbl">Активности</span>
+            <span class="val"><a href="https://pastorskoelake.ru/leisure" target="_blank" rel="noopener">pastorskoelake.ru/leisure</a></span>
+          </div>
+          <div class="dest-meta-row">
+            <span class="lbl">Парковка</span>
+            <span class="val">Бесплатная, на территории</span>
+          </div>
+          <div class="dest-meta-row">
+            <span class="lbl">От СПб</span>
+            <span class="val">30—40 минут</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PHOTOS — WEDDING -->
-<section class="photos-wedding">
-  <div class="wrap">
-    <div class="section-label reveal">Кадр из 1 апреля · 05</div>
-    <h2 class="section-title reveal">Это не было <strong>розыгрышем</strong></h2>
-    <p class="section-sub reveal">
-      1 апреля 2026 мы расписались во 2-м Дворце бракосочетания. Выложили фото — все решили, что шутка. Не шутка. Настоящее.
-    </p>
-
-    <div class="wedding-gallery">
-      <div class="wedding-item feature reveal">
-        <div class="wedding-placeholder">
-          <div class="wp-stamp">01.04.2026 · LED</div>
-          <div class="wp-mid">«Это розыгрыш»<br>(нет)</div>
-          <div class="wp-bottom">[главное фото]</div>
-        </div>
-      </div>
-
-      <div class="wedding-item reveal">
-        <div class="wedding-placeholder">
-          <div class="wp-stamp">02</div><div></div>
-          <div class="wp-bottom">[фото]</div>
-        </div>
-      </div>
-
-      <div class="wedding-item reveal">
-        <div class="wedding-placeholder">
-          <div class="wp-stamp">03</div><div></div>
-          <div class="wp-bottom">[фото]</div>
-        </div>
-      </div>
-
-      <div class="wedding-item reveal">
-        <div class="wedding-placeholder">
-          <div class="wp-stamp">04</div><div></div>
-          <div class="wp-bottom">[фото]</div>
-        </div>
-      </div>
-
-      <div class="wedding-item reveal">
-        <div class="wedding-placeholder">
-          <div class="wp-stamp">05</div><div></div>
-          <div class="wp-bottom">[фото]</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- LOGISTICS -->
+<!-- LOGISTICS (2 wide cards) -->
 <section class="logistics">
   <div class="wrap">
-    <div class="section-label reveal">Информация для пассажиров · 06</div>
+    <div class="section-label reveal">Информация для пассажиров · 04</div>
     <h2 class="section-title reveal">Что важно <strong>знать заранее</strong></h2>
 
     <div class="log-grid">
       <div class="log-card reveal">
-        <div class="log-num">01</div>
-        <div class="log-title">Проживание</div>
+        <div class="log-num">01 · Логистика</div>
+        <div class="log-title">Как добраться и где жить</div>
         <div class="log-text">
-          Мы расселяем всех в <strong>4–8-местные дома по 2 человека в комнату</strong> — вы будете рядом со «своими». Если хочется большего комфорта — двухместные домики можно забронировать самостоятельно через клуб; такие апгрейды мы, к сожалению, не оплачиваем.
+          <strong>Дорога.</strong> Трансфер мы не организуем. Парковка на территории бесплатная. Проверьте маршрут в навигаторе и заложите запас по времени.
+        </div>
+        <div class="log-text">
+          <strong>Проживание.</strong> Расселяем всех в 4–8-местные дома по 2 человека в комнату — будете рядом со «своими». Хочется большего комфорта — двухместные домики можно забронировать самостоятельно через клуб (такие апгрейды мы не оплачиваем).
+        </div>
+        <div class="log-text">
+          <strong>Подарки.</strong> Самый ценный для нас вариант — конверт, всё потратим на путешествия. Вместо букета — будем рады цветочной подписке или вкладу в наш мини-бар.
         </div>
       </div>
 
       <div class="log-card reveal">
-        <div class="log-num">02</div>
-        <div class="log-title">Дорога</div>
+        <div class="log-num">02 · Связь</div>
+        <div class="log-title">К кому обращаться</div>
         <div class="log-text">
-          Трансфер мы <strong>не организуем</strong>. Парковка на территории бесплатная. Лучше всего проверить маршрут в навигаторе заранее и заложить запас по времени.
+          За две недели до даты запустим <strong>чат с гостями</strong> — туда же пришлём расселение и финальное расписание.
         </div>
-      </div>
-
-      <div class="log-card reveal">
-        <div class="log-num">03</div>
-        <div class="log-title">Напитки</div>
-        <div class="log-text">
-          Все напитки — <strong>на нас</strong>. Алкоголь и безалкогольное: каждый найдёт для себя что-то по вкусу.
-        </div>
-      </div>
-
-      <div class="log-card reveal">
-        <div class="log-num">04</div>
-        <div class="log-title">Связь</div>
-        <div class="log-text" style="margin-bottom:18px">
-          За две недели до даты запустим <strong>чат с гостями</strong> — туда же пришлём расселение и финальное расписание. По любым вопросам — нам напрямую или координатору.
-        </div>
-        <div class="contact-row">
-          <span class="role">Кристина</span>
-          <span class="person">@ksazonovaa<br><small>+7 981 767 71 00</small></span>
-        </div>
-        <div class="contact-row">
-          <span class="role">Дима</span>
-          <span class="person">@dmitryvsmirnov<br><small>+7 916 117 08 79</small></span>
-        </div>
-        <div class="contact-row">
-          <span class="role">Координатор</span>
-          <span class="person">[имя]<br><small>[контакт]</small></span>
-        </div>
-        <div class="contact-row">
-          <span class="role">Ведущий</span>
-          <span class="person">[имя]<br><small>[контакт]</small></span>
+        <div class="log-sub">
+          <div class="contact-row">
+            <span class="role">Кристина</span>
+            <span class="person">@ksazonovaa<br><small>+7 981 767 71 00</small></span>
+          </div>
+          <div class="contact-row">
+            <span class="role">Дима</span>
+            <span class="person">@dmitryvsmirnov<br><small>+7 916 117 08 79</small></span>
+          </div>
+          <div class="contact-row">
+            <span class="role">Координатор</span>
+            <span class="person">Ульяна<br><small>+7 977 089 30 69</small></span>
+          </div>
+          <div class="contact-row">
+            <span class="role">Ведущий</span>
+            <span class="person">Сергей<br><small><a href="https://t.me/otklpg" target="_blank" rel="noopener">@otklpg</a> · +7 960 232 12 95</small></span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DRESS CODE -->
+<!-- DRESS CODE (compact, head inline) -->
 <section class="dress">
   <div class="wrap">
-    <div class="section-label reveal">Дресс-код · 07</div>
+    <div class="section-label reveal">Дресс-код · 05</div>
     <h2 class="section-title reveal">Что <strong>надеть на борт</strong></h2>
     <p class="section-sub reveal">
-      Нам неважно чёткое попадание в оттенки — важно настроение. Главное, чтобы фото потом смотрелись цельно, а вам было удобно.
+      Нам неважно чёткое попадание в оттенки — важно настроение. Главное, чтобы фото смотрелись цельно, а вам было удобно.
     </p>
 
     <div class="dress-grid">
       <div class="dress-day reveal">
-        <div class="dress-day-num">01</div>
-        <div class="dress-day-title">Суббота · банкет</div>
-        <div class="dress-day-mood">Cocktail · светлое · тёплые оттенки</div>
+        <div class="dress-day-head">
+          <div class="dress-day-num">01</div>
+          <div class="dress-day-title">Сб · банкет</div>
+        </div>
+        <div class="dress-day-mood">Cocktail · светлое · тёплое</div>
         <ul class="dress-list">
           <li><span class="lbl">Стиль</span><span class="val">Коктейльный</span></li>
-          <li><span class="lbl">Палитра</span><span class="val">песочный, бежевый, шампань, нежно-голубой, оливковый, терракотовый, графит</span></li>
-          <li><span class="lbl">Можно</span><span class="val">платья, костюмы, рубашки и брюки — главное, чтобы было удобно</span></li>
-          <li><span class="lbl">Нельзя</span><span class="val">белое total (оставим невесте), чёрное total, кислотные цвета</span></li>
+          <li><span class="lbl">Предпочтительно</span><span class="val">платья, костюмы, рубашки и брюки — главное, чтобы было удобно</span></li>
+          <li><span class="lbl">Воздержитесь</span><span class="val">белое total (оставим невесте), чёрное total, кислотные цвета</span></li>
         </ul>
         <div class="dress-note">Не нужно подбирать оттенок «в ноль» — попадайте в настроение, а не в цвет.</div>
-        <div class="palette" title="Палитра дня 1">
-          <span style="background:#F5E6D3"></span>
-          <span style="background:#EBD9BF"></span>
-          <span style="background:#D4AF37"></span>
-          <span style="background:#E07A5F"></span>
-          <span style="background:#A8B5A0"></span>
-          <span style="background:#2C2C2C"></span>
-        </div>
       </div>
 
       <div class="dress-day reveal">
-        <div class="dress-day-num">02</div>
-        <div class="dress-day-title">Воскресенье · у воды</div>
+        <div class="dress-day-head">
+          <div class="dress-day-num">02</div>
+          <div class="dress-day-title">Вс · у воды</div>
+        </div>
         <div class="dress-day-mood">Smart-casual · природа · свобода</div>
         <ul class="dress-list">
-          <li><span class="lbl">Стиль</span><span class="val">Что угодно — лён, спортивный костюм, smart-casual</span></li>
-          <li><span class="lbl">Палитра</span><span class="val">любые оттенки</span></li>
-          <li><span class="lbl">Тепло</span><span class="val">возьмите что-то тёплое — вечер у озера прохладный</span></li>
+          <li><span class="lbl">Стиль</span><span class="val">Что угодно — лён, спортивный, smart-casual</span></li>
+          <li><span class="lbl">Предпочтительно</span><span class="val">любые оттенки, удобная обувь, многослойность</span></li>
+          <li><span class="lbl">Тепло</span><span class="val">возьмите кофту — вечер у озера прохладный</span></li>
           <li><span class="lbl">Купальник</span><span class="val">да, если планируете сап или баню</span></li>
         </ul>
-        <div class="dress-note">Учитывайте, что это природа: хорошая обувь и лёгкая многослойность пригодятся.</div>
-        <div class="palette" title="Палитра дня 2">
-          <span style="background:#F5E6D3"></span>
-          <span style="background:#2A9D8F"></span>
-          <span style="background:#A8B5A0"></span>
-          <span style="background:#2C2C2C"></span>
-          <span style="background:#FFFFFF;border-color:rgba(255,255,255,0.4)"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GIFTS -->
-<section class="gifts-section">
-  <div class="wrap">
-    <div class="section-label reveal">Подарки · 08</div>
-    <h2 class="section-title reveal">Если <strong>хочется что-то подарить</strong></h2>
-
-    <div class="gifts-grid">
-      <div class="gift-card reveal">
-        <div class="gift-num">01</div>
-        <div class="gift-title">Конверт</div>
-        <div class="gift-text">
-          Самый простой и самый ценный для нас вариант. <strong>Всё, что соберём, потратим на путешествия</strong> — каждый ваш конверт превратится в новый штамп в паспорте.
-        </div>
-      </div>
-
-      <div class="gift-card reveal">
-        <div class="gift-num">02</div>
-        <div class="gift-title">Вместо букета</div>
-        <div class="gift-text">
-          Цветы — это красиво, но недолго. Если хочется именно подарить что-то <strong>осязаемое</strong> — будем рады <strong>цветочной подписке</strong> или вкладу в наш мини-бар.
-        </div>
+        <div class="dress-note">Это природа: хорошая обувь и лёгкая многослойность пригодятся.</div>
       </div>
     </div>
   </div>
@@ -1491,7 +1341,7 @@ footer{
 <!-- FAQ -->
 <section class="faq-section">
   <div class="wrap">
-    <div class="section-label reveal">Частые вопросы · 09</div>
+    <div class="section-label reveal">Частые вопросы · 06</div>
     <h2 class="section-title reveal">Что <strong>обычно спрашивают</strong></h2>
 
     <div class="faq-list reveal">
@@ -1501,7 +1351,7 @@ footer{
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-a">
-          Нет, трансфер мы не организуем. Лучше всего проверить маршрут в навигаторе заранее, заложить запас по времени и приехать на машине (парковка на территории клуба бесплатная) или на такси. В чате гостей за две недели до даты соберём попутки — кооперируйтесь.
+          Нет, трансфер мы не организуем. Лучше всего проверить маршрут в навигаторе заранее и приехать на машине (парковка на территории бесплатная) или на такси. В чате гостей за две недели соберём попутки.
         </div>
       </div>
 
@@ -1521,17 +1371,17 @@ footer{
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-a">
-          Самое ценное — что вы вообще нашли время приехать. Если хочется конкретики — <strong>конверт</strong> (потратим на путешествия), а вместо цветов — <strong>цветочная подписка</strong> или вклад в наш мини-бар. Подробнее — в блоке выше.
+          Самое ценное — что вы вообще нашли время приехать. Если хочется конкретики — <strong>конверт</strong> (потратим на путешествия), а вместо цветов — <strong>цветочная подписка</strong> или вклад в наш мини-бар.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          <span>Можно снимать на телефон?</span>
+          <span>Можно ли сделать сюрприз или выступить на банкете?</span>
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-a">
-          Снимайте сколько угодно — кроме самой церемонии. На церемонии работают наш фотограф и видеограф, и нам важно, чтобы первый ряд кадров был без вытянутых рук с экранами. Дальше — банкет, второй день, вечер — снимайте всё. После свадьбы соберём общий альбом, куда можно будет скинуть свои кадры.
+          Конечно — будем искренне рады! Если есть идея, номер, тост со слайдами или что-то совсем неожиданное — это именно то, что делает вечер живым. Свяжитесь с ведущим заранее, он встроит всё в программу так, чтобы сюрприз остался сюрпризом.
         </div>
       </div>
 
@@ -1541,7 +1391,7 @@ footer{
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-a">
-          Главное — успеть к церемонии в 16:30. На банкет можно подключиться позже, никто не обидится. Если понимаете, что точно опаздываете — напишите Кристине, Диме или координатору, мы предупредим площадку и оставим вам место.
+          Главное — успеть к церемонии в 16:30. На банкет можно подключиться позже, никто не обидится. Если понимаете, что точно опаздываете — напишите координатору или Диме, мы предупредим площадку и оставим вам место.
         </div>
       </div>
 
@@ -1551,7 +1401,7 @@ footer{
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-a">
-          Заезд с <strong>15:30 в субботу</strong>. Раньше — нельзя, у площадки идёт подготовка. Расселение по коттеджам мы пришлём в чат гостей за две недели, чтобы вы знали, кто с кем и в каком домике. Выезд: до 14:00 в понедельник.
+          Заселение с <strong>16:00 в субботу</strong>, но мы приглашаем вас на полчаса пораньше — пройти check-in без суеты и насладиться игристым. Раньше нельзя, у площадки идёт подготовка. Расселение по коттеджам пришлём в чат за две недели. Выезд: до 14:00 в понедельник.
         </div>
       </div>
     </div>
@@ -1561,10 +1411,10 @@ footer{
 <!-- RSVP -->
 <section class="rsvp" id="rsvp">
   <div class="wrap">
-    <div class="section-label reveal">Подтверждение · 10</div>
+    <div class="section-label reveal">Подтверждение · 07</div>
     <h2 class="rsvp-title reveal">Подтвердите посадку</h2>
     <p class="rsvp-text reveal">
-      Чтобы мы понимали, на сколько человек накрывать стол и как рассадить вас по гейтам — пожалуйста, заполните короткую гугл-форму. Это займёт пару минут.
+      Пожалуйста, обязательно заполните форму ниже, чтобы мы понимали актуальное количество гостей и расселили всех по домикам — это займёт пару минут.
     </p>
     <div class="rsvp-deadline reveal">Дедлайн ответа · до 15 июня 2026</div>
     <a class="rsvp-btn reveal" href="https://forms.gle/7qD2aP5m9277sbkq7" target="_blank" rel="noopener">Заполнить форму</a>
@@ -1581,7 +1431,6 @@ footer{
 </footer>
 
 <script>
-// Clock
 function tick(){
   const d = new Date();
   const hh = String(d.getHours()).padStart(2,'0');
@@ -1591,24 +1440,22 @@ function tick(){
 }
 tick();setInterval(tick, 30000);
 
-// Reveal on scroll
 const io = new IntersectionObserver((entries)=>{
   entries.forEach((e,i)=>{
     if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('in'), i*60);
+      setTimeout(()=>e.target.classList.add('in'), i*50);
       io.unobserve(e.target);
     }
   });
 },{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// FAQ accordion
 function toggleFaq(btn){
   const item = btn.parentElement;
   item.classList.toggle('open');
+  setTimeout(buildPath, 450);
 }
 
-// === DASHED ROUTE WITH PLANE ===
 function buildPath(){
   const wrap = document.getElementById('timeline');
   const svg = document.getElementById('path-svg');
@@ -1624,6 +1471,7 @@ function buildPath(){
   svg.innerHTML = '';
 
   const isMobile = window.innerWidth <= 880;
+  const isSmall = window.innerWidth <= 600;
 
   const points = [];
   stops.forEach(s=>{
@@ -1636,36 +1484,54 @@ function buildPath(){
   });
   if(points.length < 2) return;
 
+  const amp = isSmall ? 8 : (isMobile ? 32 : 90);
+
   let d = `M ${points[0].x} ${points[0].y}`;
   for(let i=1;i<points.length;i++){
     const prev = points[i-1];
     const cur = points[i];
-    const midY = (prev.y + cur.y)/2;
-    const sway = isMobile ? 0 : (i%2===0 ? -40 : 40);
+    const sway = (i % 2 === 0) ? -amp : amp;
     const cx1 = prev.x + sway;
-    const cx2 = cur.x - sway;
-    d += ` C ${cx1} ${midY}, ${cx2} ${midY}, ${cur.x} ${cur.y}`;
+    const cy1 = prev.y + (cur.y - prev.y) * 0.35;
+    const cx2 = cur.x + sway;
+    const cy2 = prev.y + (cur.y - prev.y) * 0.65;
+    d += ` C ${cx1} ${cy1}, ${cx2} ${cy2}, ${cur.x} ${cur.y}`;
   }
 
   const ns = 'http://www.w3.org/2000/svg';
   const path = document.createElementNS(ns,'path');
   path.setAttribute('d', d);
   path.setAttribute('fill','none');
-  path.setAttribute('stroke','rgba(212,175,55,0.55)');
+  path.setAttribute('stroke','rgba(232,184,107,0.55)');
   path.setAttribute('stroke-width','1.5');
-  path.setAttribute('stroke-dasharray','4 8');
+  path.setAttribute('stroke-dasharray','5 9');
   path.setAttribute('stroke-linecap','round');
-  path.id = 'route-path';
   svg.appendChild(path);
 
   const plane = document.createElementNS(ns,'g');
-  plane.setAttribute('id','plane');
-  const planeShape = document.createElementNS(ns,'path');
-  planeShape.setAttribute('d', 'M -14,0 L 10,-3 L 14,0 L 10,3 Z M -2,-1.5 L -2,-7 L 2,-7 L 2,-1.5 M -2,1.5 L -2,7 L 2,7 L 2,1.5');
-  planeShape.setAttribute('fill','#E07A5F');
-  planeShape.setAttribute('stroke','#F5E6D3');
-  planeShape.setAttribute('stroke-width','0.6');
-  plane.appendChild(planeShape);
+  const planePath = 'M 0,-18 C 1.2,-18 2,-16 2,-13 L 2,-7 L 16,-2 C 17,-1.6 17,1.6 16,2 L 2,7 L 2,12 L 8,15 C 8.5,15.3 8.5,16.7 8,17 L 0,15.5 L -8,17 C -8.5,16.7 -8.5,15.3 -8,15 L -2,12 L -2,7 L -16,2 C -17,1.6 -17,-1.6 -16,-2 L -2,-7 L -2,-13 C -2,-16 -1.2,-18 0,-18 Z';
+
+  const shadow = document.createElementNS(ns,'path');
+  shadow.setAttribute('d', planePath);
+  shadow.setAttribute('fill','rgba(0,0,0,0.3)');
+  shadow.setAttribute('transform','translate(0.6, 1)');
+
+  const body = document.createElementNS(ns,'path');
+  body.setAttribute('d', planePath);
+  body.setAttribute('fill','#FAF5EC');
+  body.setAttribute('stroke','#E8B86B');
+  body.setAttribute('stroke-width','0.8');
+  body.setAttribute('stroke-linejoin','round');
+
+  const window_ = document.createElementNS(ns,'path');
+  window_.setAttribute('d','M -8,-2 L 8,-2');
+  window_.setAttribute('stroke','rgba(14,26,43,0.3)');
+  window_.setAttribute('stroke-width','0.5');
+  window_.setAttribute('fill','none');
+
+  plane.appendChild(shadow);
+  plane.appendChild(body);
+  plane.appendChild(window_);
   svg.appendChild(plane);
 
   const pathLen = path.getTotalLength();
@@ -1677,10 +1543,12 @@ function buildPath(){
     p = Math.max(0, Math.min(1, p));
     const pt = path.getPointAtLength(p * pathLen);
     const ahead = path.getPointAtLength(Math.min(pathLen, p*pathLen + 1));
-    const angle = Math.atan2(ahead.y - pt.y, ahead.x - pt.x) * 180/Math.PI;
+    const angle = Math.atan2(ahead.y - pt.y, ahead.x - pt.x) * 180/Math.PI + 90;
     plane.setAttribute('transform', `translate(${pt.x}, ${pt.y}) rotate(${angle})`);
   }
   update();
+  if(window.__planeScrollHandler) window.removeEventListener('scroll', window.__planeScrollHandler);
+  window.__planeScrollHandler = update;
   window.addEventListener('scroll', update, {passive:true});
 }
 
@@ -1691,8 +1559,11 @@ function rebuild(){
 }
 window.addEventListener('load', buildPath);
 window.addEventListener('resize', rebuild);
-document.addEventListener('click', (e)=>{
-  if(e.target.closest('.faq-q')) setTimeout(buildPath, 450);
+window.addEventListener('orientationchange', rebuild);
+window.addEventListener('load', ()=>{
+  document.querySelectorAll('img').forEach(img=>{
+    if(!img.complete) img.addEventListener('load', rebuild, {once:true});
+  });
 });
 </script>
 
