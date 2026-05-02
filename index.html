@@ -921,6 +921,58 @@ footer{
   .reveal{opacity:1;transform:none;transition:none}
   .board-dot{animation:none}
 }
+
+/* Dress code palette swatches */
+.dress-palette{
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px dashed rgba(250,245,236,0.16);
+}
+.dress-palette-label{
+  font-family:var(--mono);
+  font-size:clamp(9px, 2.3vw, 10px);
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--coral-soft);
+  margin-bottom:14px;
+}
+.dress-swatches{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:10px 14px;
+}
+.dress-swatches .swatch{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--on-dark);
+  letter-spacing:0.04em;
+  min-width:0;
+}
+.dress-swatches .swatch .dot{
+  width:18px;height:18px;
+  border-radius:50%;
+  flex-shrink:0;
+  box-shadow:0 1px 4px rgba(0,0,0,0.25);
+}
+.dress-swatches .swatch .name{
+  flex:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-size:11px;
+  color:var(--paper);
+}
+.dress-swatches .swatch .hex{
+  display:none;
+  color:var(--on-dark-soft);
+  font-size:9px;
+}
+@media(max-width:600px){
+  .dress-swatches{grid-template-columns:repeat(2, 1fr);gap:10px}
+}  
 </style>
 </head>
 <body>
@@ -1221,6 +1273,20 @@ footer{
           <li><span class="lbl">Воздержитесь</span><span class="val">белое total (оставим невесте), чёрное total, кислотные цвета</span></li>
         </ul>
         <div class="dress-note">Не нужно подбирать оттенок «в точку» — попадайте в настроение, а не в цвет.</div>
+      <div class="dress-palette">
+  <div class="dress-palette-label">Палитра дня</div>
+  <div class="dress-swatches">
+    <div class="swatch"><span class="dot" style="background:#FAF5EC"></span><span class="name">Кремовый</span><span class="hex">#FAF5EC</span></div>
+    <div class="swatch"><span class="dot" style="background:#F0E7D4"></span><span class="name">Тёплый беж</span><span class="hex">#F0E7D4</span></div>
+    <div class="swatch"><span class="dot" style="background:#C8B89A"></span><span class="name">Латте</span><span class="hex">#C8B89A</span></div>
+    <div class="swatch"><span class="dot" style="background:#E8B86B"></span><span class="name">Золото</span><span class="hex">#E8B86B</span></div>
+    <div class="swatch"><span class="dot" style="background:#D4A89A"></span><span class="name">Пыльная роза</span><span class="hex">#D4A89A</span></div>
+    <div class="swatch"><span class="dot" style="background:#B8C4C4"></span><span class="name">Серо-голубой</span><span class="hex">#B8C4C4</span></div>
+    <div class="swatch"><span class="dot" style="background:#7A8AA3"></span><span class="name">Туман</span><span class="hex">#7A8AA3</span></div>
+    <div class="swatch"><span class="dot" style="background:#3A4A66"></span><span class="name">Графит</span><span class="hex">#3A4A66</span></div>
+    <div class="swatch"><span class="dot" style="background:#0E1A2B;border:1px solid rgba(250,245,236,0.25)"></span><span class="name">Полночный синий</span><span class="hex">#0E1A2B</span></div>
+  </div>
+</div>
       </div>
 
       <div class="dress-day reveal">
@@ -1406,41 +1472,77 @@ function buildPath(){
   path.setAttribute('stroke-linecap','round');
   svg.appendChild(path);
 
+// === Новый стилизованный самолёт ===
   const plane = document.createElementNS(ns,'g');
-  const planePath = 'M 0,-18 C 1.2,-18 2,-16 2,-13 L 2,-7 L 16,-2 C 17,-1.6 17,1.6 16,2 L 2,7 L 2,12 L 8,15 C 8.5,15.3 8.5,16.7 8,17 L 0,15.5 L -8,17 C -8.5,16.7 -8.5,15.3 -8,15 L -2,12 L -2,7 L -16,2 C -17,1.6 -17,-1.6 -16,-2 L -2,-7 L -2,-13 C -2,-16 -1.2,-18 0,-18 Z';
 
+  // Более изящный силуэт: вытянутый фюзеляж со стреловидными крыльями и
+  // острым хвостовым оперением. Базовая ориентация — носом вверх (-Y).
+  const planePath = 'M 0,-22 C 2,-22 3,-19 3,-15 L 3,-8 L 18,2 C 19.5,2.4 19.5,3.6 18,4 L 3,5 L 3,12 L 10,17 C 10.6,17.4 10.6,18.6 10,19 L 0,17 L -10,19 C -10.6,18.6 -10.6,17.4 -10,17 L -3,12 L -3,5 L -18,4 C -19.5,3.6 -19.5,2.4 -18,2 L -3,-8 L -3,-15 C -3,-19 -2,-22 0,-22 Z';
+
+  // Тень
   const shadow = document.createElementNS(ns,'path');
   shadow.setAttribute('d', planePath);
-  shadow.setAttribute('fill','rgba(0,0,0,0.3)');
-  shadow.setAttribute('transform','translate(0.6, 1)');
+  shadow.setAttribute('fill','rgba(0,0,0,0.35)');
+  shadow.setAttribute('transform','translate(0.8, 1.2)');
+  shadow.setAttribute('filter','blur(0.5px)');
 
+  // Корпус — кремовый с золотой обводкой
   const body = document.createElementNS(ns,'path');
   body.setAttribute('d', planePath);
   body.setAttribute('fill','#FAF5EC');
   body.setAttribute('stroke','#E8B86B');
-  body.setAttribute('stroke-width','0.8');
+  body.setAttribute('stroke-width','1');
   body.setAttribute('stroke-linejoin','round');
 
-  const window_ = document.createElementNS(ns,'path');
-  window_.setAttribute('d','M -8,-2 L 8,-2');
-  window_.setAttribute('stroke','rgba(14,26,43,0.3)');
-  window_.setAttribute('stroke-width','0.5');
-  window_.setAttribute('fill','none');
+  // Кокпит — небольшой коралловый овал у носа
+  const cockpit = document.createElementNS(ns,'ellipse');
+  cockpit.setAttribute('cx','0');
+  cockpit.setAttribute('cy','-15');
+  cockpit.setAttribute('rx','1.6');
+  cockpit.setAttribute('ry','3.2');
+  cockpit.setAttribute('fill','#E96B4A');
+
+  // Линия иллюминаторов
+  const windows = document.createElementNS(ns,'path');
+  windows.setAttribute('d','M -2,-7 L 2,-7 M -2,-3 L 2,-3 M -2,1 L 2,1');
+  windows.setAttribute('stroke','rgba(14,26,43,0.45)');
+  windows.setAttribute('stroke-width','0.6');
+  windows.setAttribute('stroke-linecap','round');
+  windows.setAttribute('fill','none');
+
+  // Полоска по фюзеляжу — золотая
+  const stripe = document.createElementNS(ns,'path');
+  stripe.setAttribute('d','M -1.2,-12 L -1.2,11 M 1.2,-12 L 1.2,11');
+  stripe.setAttribute('stroke','rgba(232,184,107,0.4)');
+  stripe.setAttribute('stroke-width','0.4');
+  stripe.setAttribute('fill','none');
 
   plane.appendChild(shadow);
   plane.appendChild(body);
-  plane.appendChild(window_);
+  plane.appendChild(stripe);
+  plane.appendChild(windows);
+  plane.appendChild(cockpit);
   svg.appendChild(plane);
 
   const pathLen = path.getTotalLength();
+
+  // Смещение «вперёд» — на сколько пикселей самолёт летит впереди
+  // текущей точки скролла. ~50 пикселей — самолёт визуально лидирует.
+  const LEAD = 50;
 
   function update(){
     const r = wrap.getBoundingClientRect();
     const vh = window.innerHeight;
     let p = (vh - r.top) / (vh + r.height);
     p = Math.max(0, Math.min(1, p));
-    const pt = path.getPointAtLength(p * pathLen);
-    const ahead = path.getPointAtLength(Math.min(pathLen, p*pathLen + 1));
+
+    // Базовая позиция по скроллу
+    const basePos = p * pathLen;
+    // Самолёт впереди — добавляем LEAD, но не вылетая за конец маршрута
+    const planePos = Math.min(pathLen, basePos + LEAD);
+
+    const pt = path.getPointAtLength(planePos);
+    const ahead = path.getPointAtLength(Math.min(pathLen, planePos + 1));
     const angle = Math.atan2(ahead.y - pt.y, ahead.x - pt.x) * 180/Math.PI + 90;
     plane.setAttribute('transform', `translate(${pt.x}, ${pt.y}) rotate(${angle})`);
   }
@@ -1448,7 +1550,6 @@ function buildPath(){
   if(window.__planeScrollHandler) window.removeEventListener('scroll', window.__planeScrollHandler);
   window.__planeScrollHandler = update;
   window.addEventListener('scroll', update, {passive:true});
-}
 
 let resizeTimer;
 function rebuild(){
